@@ -1,27 +1,27 @@
 import { useContext, useEffect } from "react";
 import Task from "./Task";
-import TasksContextProvider from "../../context/TasksContextProvider";
+import TasksContext from "../../context/TasksContext";
 
 const Tasks = () => {
-    const { tasks } = useContext(TasksContextProvider);
+    const { tasks } = useContext(TasksContext);
 
-    /*
     useEffect(() => {
         console.log(tasks);
-    });
-    */
+    }, [tasks]);
 
-    const renderedTasks = tasks.map(task => (
-        <Task id={task.id} text={task.text} done={task.done} />
-    ));
+    const renderedTasks = tasks.map(task =>
+        <Task key={task.id} id={task.id} text={task.text} done={task.done} />
+    );
 
     return (
         <table>
             <thead>
-                <th>Id</th>
-                <th>Text</th>
-                <th>Done</th>
-                <th>Action</th>
+                <tr>
+                    <th>Id</th>
+                    <th>Text</th>
+                    <th>Done</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
                 { tasks ? renderedTasks : <p>Loading data...</p> }
